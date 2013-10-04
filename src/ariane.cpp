@@ -19,20 +19,27 @@ namespace ariane {
 /*{{{ ariane class
  ****************************************************************************/
     /* constructor */
-    ariane::ariane( const gladys::weight_map& _wm ) : ng ( _wm)//{{{
+    ariane::ariane( const gladys::weight_map& _wm, //{{{
+                    double _max_step_length, double _curb_tolerance ) :
+        ng ( _wm)
     {
+        max_step_length = _max_step_length ;
+        curb_tolerance = _curb_tolerance ;
     }//}}}
 
     /* computing functions */
+    void ariane::update( const gladys::weight_map& _wm ) {//{{
+        //TODO when ng is updatable
+    }//}}}
 
-    gladys::points_t ariane::plan( const gladys::point_xy_t &start, const gladys::point_xy_t &goal ){//{{{
-        gladys::points_t path ;
-        gladys::points_t waypoints ;
+    gladys::path_t ariane::plan( const gladys::point_xy_t &start, const gladys::point_xy_t &goal ) const {//{{{
+        gladys::path_t path ;
+        gladys::path_t waypoints ;
 
         /* compute path */
         std::cerr << "[ariane] Computing path... " << std::endl ;
         try {
-            //TODO
+            path = ng.astar_search(start, goal) ;
         } catch (std::exception& e) {
             std::cerr << "[ariane] catch exception : " << e.what() << std::endl ;
             std::cerr << "[ariane] Fail to compute a valid path : please check your data." << std::endl ;
@@ -43,6 +50,7 @@ namespace ariane {
         std::cerr << "[ariane] path computed. Extracting waypoints..." << std::endl ;
 
         //TODO
+        waypoints = path ;
 
         /* the end */
         std::cerr << "[ariane] Done." << std::endl ;

@@ -24,20 +24,25 @@ class ariane{
 
 private :
     /* internal data */
-    //const gladys::weight_map& wm ;                    // the weight map (data)
-    gladys::nav_graph ng ;                              // nav graph (from wm)
+    //const gladys::weight_map& wm ;    // the weight map (data)
+    gladys::nav_graph ng ;              // nav graph (from wm)
 
     /* internal parameters */
+    double max_step_length ;            // maximal distance between two successive waypoints
+    double curb_tolerance ;             // use to define additionnal waypoints in curves
 
     /* hidden computing functions */
 
 public:
     /** ariane constructor
      *
-     * @param wm the weight_map (gladys)
+     * @param wm                the weight_map (gladys)
+     * @param max_step_length   maximal distance between two successive waypoints
+     * @param curb_tolerance    use to define additionnal waypoints in curves.
      *
      */
-    ariane( const gladys::weight_map& _wm ) ;
+    ariane( const gladys::weight_map& _wm, 
+            double max_step_length, double curb_tolerance ) ;
 
     /** plan a waypoints to the goal
      *
@@ -45,7 +50,14 @@ public:
      * @param goal  : the goal position.
      *
      */
-    gladys::points_t plan( const gladys::point_xy_t &start, const gladys::point_xy_t &goal );
+    gladys::path_t plan( const gladys::point_xy_t &start, const gladys::point_xy_t &goal ) const ;
+
+    /** update the ng with a new map
+     *
+     * @param map : the new weight_map
+     *
+     */
+    void update( const gladys::weight_map& _wm );
 
     /* getters */
     std::array<double, 4> get_transform() const {//{{{
