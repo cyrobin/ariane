@@ -1,5 +1,5 @@
 add_library( ariane SHARED ariane.cpp )
-target_link_libraries( ariane ${LIBGLADYS_LIBRARIES} ${GDAL_LIBRARIES} )
+target_link_libraries( ariane ${LIBGLADYS_LIBRARIES} )
 install(TARGETS ariane DESTINATION ${CMAKE_INSTALL_LIBDIR})
 install_pkg_config_file(libariane
     DESCRIPTION "eXploration module for Autonomous Robotic Embedded Systems"
