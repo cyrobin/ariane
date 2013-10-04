@@ -57,8 +57,9 @@ public:
      * @param map : the new weight_map
      *
      */
-    void update( const gladys::weight_map& _wm );
+    //void update( const gladys::weight_map& _wm );
 
+    /* setters */
     /* getters */
     std::array<double, 4> get_transform() const {//{{{
         //TODO take "North up" into account
