@@ -1,6 +1,6 @@
 macro(add_ariane_test name)
     add_executable(${name} ${name}.cpp)
-    target_link_libraries(${name} ariane)
+    target_link_libraries(${name} ariane ${GDALWRAP_LIBRARIES} )
     add_test(${name} ${name})
 endmacro()
 
