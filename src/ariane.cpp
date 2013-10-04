@@ -60,11 +60,10 @@ namespace ariane {
 
         i++;
         for ( ; i < d_path.path.size() ; i++ ) {
-            cost = d_path.costs[i] - last_cost;         // cost since the last waypoint
+            cost = (d_path.costs[i] - last_cost) * v ;          // cost since the last waypoint
             dist = gladys::distance( last, d_path.path[i] );    // euclidian distance
 
-            if ( cost > max_step_length
-            ||   cost * v  > ( 1 + curb_tolerance ) * dist )
+            if ( cost > max_step_length || cost > ( 1 + curb_tolerance ) * dist )
             {
                 //new waypoint
                 last = d_path.path[i] ;
@@ -72,6 +71,9 @@ namespace ariane {
                 waypoints.push_back( last );
             }
         }
+
+        // always add the last point
+        waypoints.push_back( d_path.path.back() );
 
         /* the end */
         std::cerr << "[ariane] Done." << std::endl ;
