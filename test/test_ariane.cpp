@@ -52,18 +52,16 @@ BOOST_AUTO_TEST_CASE( test_ariane )
      *
      */
     gdalwrap::gdal region;
-    region.set_size(gladys::weight_map::N_RASTER, 9, 9);
-    region.bands[gladys::weight_map::FLAT    ].assign(9*9, 1);
-    region.names[gladys::weight_map::FLAT    ] = "FLAT";
-    region.names[gladys::weight_map::OBSTACLE] = "OBSTACLE";
-    region.names[gladys::weight_map::NO_3D_CLASS] = "UNKNOWN";
+    region.set_size(4, 9, 9);
+    region.bands[1].assign(9*9, 1);
+    region.names = {"NO_3D_CLASS", "FLAT", "OBSTACLE", "ROUGH"};
     for ( int i=0 ; i < 7 ; i++ ) {
-        region.bands[gladys::weight_map::FLAT    ][i+3*9] = 0.2 ;
-        region.bands[gladys::weight_map::OBSTACLE][i+3*9] = 0.8 ;
+        region.bands[1][i+3*9] = 0.2 ;
+        region.bands[2][i+3*9] = 0.8 ;
     }
     for ( int j=3 ; j < 7 ; j++ ) {
-        region.bands[gladys::weight_map::FLAT    ][7+j*9] = 0.2 ;
-        region.bands[gladys::weight_map::OBSTACLE][7+j*9] = 0.8 ;
+        region.bands[1][7+j*9] = 0.2 ;
+        region.bands[2][7+j*9] = 0.8 ;
     }
 
     region.save(region_path);
