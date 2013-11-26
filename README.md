@@ -41,4 +41,4 @@ Other ideas can be found in Google Guides:
 LICENSE
 -------
 
-[BSD 3-Clause](http://opensource.org/licenses/BSD-3-Clause)
+[BSD 2-Clause](http://opensource.org/licenses/BSD-2-Clause)
